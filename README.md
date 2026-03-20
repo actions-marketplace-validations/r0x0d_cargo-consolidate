@@ -86,7 +86,7 @@ This makes `cargo-consolidate` ideal for CI pipelines — add it as a check to c
 This repository provides a reusable composite action:
 
 ```yaml
-- uses: r0x0d/cargo-consolidate/.github/actions/unify@v1
+- uses: r0x0d/cargo-consolidate@v1
   with:
     fail-on-mismatches: "true"  # default
     working-directory: "."       # default

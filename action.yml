@@ -1,6 +1,10 @@
 name: "cargo-consolidate"
 description: "Analyze workspace dependencies for shared deps and version mismatches"
 
+branding:
+  icon: "package"
+  color: "orange"
+
 inputs:
   version:
     description: "Version of cargo-consolidate to install"
