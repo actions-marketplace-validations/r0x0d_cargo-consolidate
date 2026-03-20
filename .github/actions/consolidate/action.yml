@@ -1,0 +1,38 @@
+name: "cargo-consolidate"
+description: "Analyze workspace dependencies for shared deps and version mismatches"
+
+inputs:
+  version:
+    description: "Version of cargo-consolidate to install"
+    required: false
+    default: "latest"
+  working-directory:
+    description: "Directory to analyze"
+    required: false
+    default: "."
+  fail-on-mismatches:
+    description: "Fail the action if version mismatches are found"
+    required: false
+    default: "true"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Install cargo-consolidate
+      shell: bash
+      run: |
+        if [ "${{ inputs.version }}" = "latest" ]; then
+          cargo install cargo-consolidate
+        else
+          cargo install cargo-consolidate --version "${{ inputs.version }}"
+        fi
+
+    - name: Run cargo consolidate
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
+      run: |
+        if [ "${{ inputs.fail-on-mismatches }}" = "true" ]; then
+          cargo consolidate
+        else
+          cargo consolidate || true
+        fi
